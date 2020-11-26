@@ -22,7 +22,7 @@ int imprimeRegistroNaTela(FILE* arquivo){
         if(nomePessoa[0] != '\0')
             printf("Nome: %s\n", nomePessoa);
         else
-            printf("Nome: -\n");              
+            printf("Nome: -\n");
         if(idadePessoa != -1)
             printf("Idade: %d anos\n", idadePessoa);
         else
@@ -36,7 +36,7 @@ int imprimeRegistroNaTela(FILE* arquivo){
 void escreveCabcArqPessoa(FILE* arquivoPessoa, int quantReg, char status){
     int i;
     fseek(arquivoPessoa, 0, SEEK_SET); //posicionando a escrita para escrever o cabecalho
-        
+
     //como o fwrite pede um ponteiro foi necessario criar vetores de uma posicao
     char cabStatus1 = status;
     char cablixo1[59];
@@ -52,11 +52,11 @@ void escreveCabcArqPessoa(FILE* arquivoPessoa, int quantReg, char status){
 
 void escreveCabcArqIndexa(FILE* arqIndex, char status){
     int i;
-    
+
     //criacao do cabecalho
     char cabStatus2 = status;
     char cablixo2[7];
-    
+
     for(i = 0; i < 7; i++)
         cablixo2[i] = '$';
 
@@ -68,7 +68,7 @@ void escreveCabcArqIndexa(FILE* arqIndex, char status){
 void escreveCabArqSegue(FILE* arquivoSegue, int quantSeg, char status){
     int i;
     fseek(arquivoSegue, 0, SEEK_SET); //posicionando a escrita para escrever o cabecalho
-        
+
     //como o fwrite pede um ponteiro foi necessario criar vetores de uma posicao
     char cabStatus1 = status;
     char cablixo[27];
@@ -85,7 +85,7 @@ void escreveCabArqSegue(FILE* arquivoSegue, int quantSeg, char status){
 //insere no arquivo pessoas
 void inserirArqPessoas(int idPessoa, char nomePessoa[60], int idadePessoa, char twitterPessoa[40], FILE* arquivoPessoa){
     int i;
-    int strFinal = 0; // quando for o final da string ele fica um 
+    int strFinal = 0; // quando for o final da string ele fica um
     for(i = 0; i < 60; i++){ //funcao para identificar e settar o lixo
         if(strFinal == 1)
             nomePessoa[i] = '$';
@@ -113,7 +113,7 @@ void inserirArqPessoas(int idPessoa, char nomePessoa[60], int idadePessoa, char 
 
     char removido = '1';
 
-    //aqui escreve todos os dados no arquivoPessoa.bin 
+    //aqui escreve todos os dados no arquivoPessoa.bin
     fwrite(&removido, sizeof(char), 1, arquivoPessoa);
     fwrite(&idPessoa, 4, 1, arquivoPessoa);
     fwrite(nomePessoa, sizeof(char), 40, arquivoPessoa);
@@ -140,7 +140,7 @@ int verificaConsistencia(FILE* arquivo){ //se tiver consistente retorna 1, se na
 }
 
 int retornaRRN(FILE* arquivo){ //retorna o RRN do id achado
-    int valor; //verifica o id requerido para encontrar o campo 
+    int valor; //verifica o id requerido para encontrar o campo
     scanf("%d", &valor);
 
     int RRN;
@@ -148,7 +148,7 @@ int retornaRRN(FILE* arquivo){ //retorna o RRN do id achado
 
     //posiciona o ponteiro do arquivo no id requerido para buscar o RRN certo
     fseek(arquivo, 4, SEEK_SET); //primeiro id
-    //apesar do primeiro id ser com 8 bytes, se somar esse fseek com o do while da os 8 bytes necessarios 
+    //apesar do primeiro id ser com 8 bytes, se somar esse fseek com o do while da os 8 bytes necessarios
 
     while(id < valor){ //passa por todos os id para verificar se ele nao foi excluido
         fseek(arquivo, 4, SEEK_CUR); //pula proximo id - pula o campo do RRN
@@ -158,8 +158,8 @@ int retornaRRN(FILE* arquivo){ //retorna o RRN do id achado
         //apos verificar a existencia do dado, procura-se o RRN e faz a busca no arquivoPessoa
         fread(&RRN, sizeof(int), 1, arquivo);
         return RRN;
-    } 
-    
+    }
+
     return -1; //se retornar -1,nao encontrou o id
 }
 
@@ -190,16 +190,16 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
     fseek(arqCSV, 83, SEEK_SET);
     while(fscanf(arqCSV, "%d%*c", &idPessoaPrinc) == 1){
         fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
-        *quantPessoas++;
+        (*quantPessoas)++;
 
         inserirArqSegue(idPessoaPrinc, idPessoaSec, grauAmizade, dataInicio, dataFim, arqSegue);
     }
-    
+
 }
 
 void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue){
     int i;
-    int strFinal = 0; // quando for o final da string ele fica um 
+    int strFinal = 0; // quando for o final da string ele fica um
     for(i = 0; i < 3; i++){ //funcao para identificar e settar o lixo
         if(strFinal == 1)
             graAmizade[i] = '$';
@@ -213,7 +213,7 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     }
     char removido = '1';
 
-    //aqui escreve todos os dados no arquivoSegue.bin 
+    //aqui escreve todos os dados no arquivoSegue.bin
     fwrite(&removido, sizeof(char), 1, arquivoSegue);
     fwrite(&idPessoaQueSegue, 4, 1, arquivoSegue);
     fwrite(&idPessoaQueESeguida, 4, 1, arquivoSegue);
