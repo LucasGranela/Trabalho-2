@@ -187,7 +187,7 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
     char dataInicio[10];
     char dataFim[10];
 
-    fseek(arqCSV, 84, SEEK_SET);
+    fseek(arqCSV, 83, SEEK_SET);
     //while(fscanf(arqCSV, "%d%*c", &idPessoaPrinc) == 1){
         fscanf(arqCSV, "%d%*c", &idPessoaPrinc);
         fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
