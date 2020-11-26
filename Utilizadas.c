@@ -179,3 +179,46 @@ int abreArquivo(FILE** arq, char* nome, char* modo, int tipo){
     *arq = arquivo;
     return 1;
 }
+
+void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
+    int idPessoaPrinc;
+    int idPessoaSec;
+    char grauAmizade[3];
+    char dataInicio[10];
+    char dataFim[10];
+
+    fseek(arqCSV, 84, SEEK_SET);
+    //while(fscanf(arqCSV, "%d%*c", &idPessoaPrinc) == 1){
+        fscanf(arqCSV, "%d%*c", &idPessoaPrinc);
+        fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
+        *quantPessoas++;
+
+        inserirArqSegue(idPessoaPrinc, idPessoaSec, grauAmizade, dataInicio, dataFim, arqSegue);
+    //}
+    
+}
+
+void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue){
+    int i;
+    int strFinal = 0; // quando for o final da string ele fica um 
+    for(i = 0; i < 3; i++){ //funcao para identificar e settar o lixo
+        if(strFinal == 1)
+            graAmizade[i] = '$';
+        else if(graAmizade[i] == '\0')
+            strFinal = 1;
+        else if(i == 2){ //aqui ele ja prepara a variavel para ser salva no tamanho exato do necessario no arquivo
+            graAmizade[i] = '\0';
+            strFinal = 1;
+            break;
+        }
+    }
+    char removido = '1';
+
+    //aqui escreve todos os dados no arquivoSegue.bin 
+    fwrite(&removido, sizeof(char), 1, arquivoSegue);
+    fwrite(&idPessoaQueSegue, 4, 1, arquivoSegue);
+    fwrite(&idPessoaQueESeguida, 4, 1, arquivoSegue);
+    fwrite(graAmizade, sizeof(char), 3, arquivoSegue);
+    fwrite(dataInicio, sizeof(char), 10, arquivoSegue);
+    fwrite(dataFim, sizeof(char), 10, arquivoSegue);
+}

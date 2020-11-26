@@ -28,12 +28,23 @@ int main () {
     scanf("%d%*c", &caso);
     if(caso == 6) {
         FILE* arquivoCSV;
+        int quantPessoas = 0;
 
         scanf("%[^ ]%*c%s", nomeArquivo1, nomeArquivo2);
 
         if(!abreArquivo(&arquivoSegue, nomeArquivo2, "wb\0", 3) || !abreArquivo(&arquivoCSV, nomeArquivo1, "rt\0", 4))
             return 0;
 
+        escreveCabArqSegue(arquivoSegue, 0, '0');
+
+        insereCSVparaSegue(arquivoSegue, arquivoCSV, &quantPessoas);
+
+        escreveCabArqSegue(arquivoSegue, quantPessoas, '1');
+
+        fclose(arquivoCSV);
+        fclose(arquivoSegue);
+
+        binarioNaTela2(nomeArquivo2);
     }
 
     return 0;
