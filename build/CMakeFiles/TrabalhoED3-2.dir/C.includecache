@@ -6,9 +6,27 @@
 
 #IncludeRegexTransform: 
 
+/home/logranela/ED3/Trabalho-2/Utilizadas.c
+Utilizadas.h
+/home/logranela/ED3/Trabalho-2/Utilizadas.h
+string.h
+-
+
+/home/logranela/ED3/Trabalho-2/Utilizadas.h
+stdio.h
+-
+stdlib.h
+-
+
+/home/logranela/ED3/Trabalho-2/fornecido.h
+
 /home/logranela/ED3/Trabalho-2/main.c
 stdio.h
 -
 stdlib.h
 -
+fornecido.h
+/home/logranela/ED3/Trabalho-2/fornecido.h
+Utilizadas.h
+/home/logranela/ED3/Trabalho-2/Utilizadas.h
 

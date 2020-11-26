@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/logranela/ED3/Trabalho-2/Utilizadas.c" "/home/logranela/ED3/Trabalho-2/build/CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o"
   "/home/logranela/ED3/Trabalho-2/fornecido.c" "/home/logranela/ED3/Trabalho-2/build/CMakeFiles/TrabalhoED3-2.dir/fornecido.c.o"
   "/home/logranela/ED3/Trabalho-2/main.c" "/home/logranela/ED3/Trabalho-2/build/CMakeFiles/TrabalhoED3-2.dir/main.c.o"
   )

@@ -520,6 +520,33 @@ ContinuousSubmit/fast:
 	$(MAKE) -f CMakeFiles/ContinuousSubmit.dir/build.make CMakeFiles/ContinuousSubmit.dir/build
 .PHONY : ContinuousSubmit/fast
 
+Utilizadas.o: Utilizadas.c.o
+
+.PHONY : Utilizadas.o
+
+# target to build an object file
+Utilizadas.c.o:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o
+.PHONY : Utilizadas.c.o
+
+Utilizadas.i: Utilizadas.c.i
+
+.PHONY : Utilizadas.i
+
+# target to preprocess a source file
+Utilizadas.c.i:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.i
+.PHONY : Utilizadas.c.i
+
+Utilizadas.s: Utilizadas.c.s
+
+.PHONY : Utilizadas.s
+
+# target to generate assembly for a file
+Utilizadas.c.s:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.s
+.PHONY : Utilizadas.c.s
+
 fornecido.o: fornecido.c.o
 
 .PHONY : fornecido.o
@@ -614,6 +641,9 @@ help:
 	@echo "... ContinuousMemCheck"
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
+	@echo "... Utilizadas.o"
+	@echo "... Utilizadas.i"
+	@echo "... Utilizadas.s"
 	@echo "... fornecido.o"
 	@echo "... fornecido.i"
 	@echo "... fornecido.s"
