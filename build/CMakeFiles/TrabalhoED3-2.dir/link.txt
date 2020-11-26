@@ -1,1 +1,0 @@
-/bin/c99-gcc -g  -rdynamic CMakeFiles/TrabalhoED3-2.dir/main.c.o CMakeFiles/TrabalhoED3-2.dir/fornecido.c.o CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o  -o TrabalhoED3-2 
