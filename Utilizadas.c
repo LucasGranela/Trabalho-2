@@ -213,8 +213,8 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     }
     char removido = '1';
 
-    char *dataInicioReal = arrumaData(dataInicio);
-    char *dataFimReal = arrumaData(dataFim);
+    char *dataInicioReal = (dataInicio);
+    char *dataFimReal = (dataFim);
 
     //aqui escreve todos os dados no arquivoSegue.bin 
     fwrite(&removido, sizeof(char), 1, arquivoSegue);
@@ -223,24 +223,4 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     fwrite(graAmizade, sizeof(char), 3, arquivoSegue);
     fwrite(dataInicioReal, sizeof(char), 10, arquivoSegue);
     fwrite(dataFimReal, sizeof(char), 10, arquivoSegue);
-}
-
-char* arrumaData(char data[10]){
-    char* dataReal;
-
-    dataReal = malloc(10*sizeof(char));
-
-    dataReal[0] = data[8];
-    dataReal[1] = data[9];
-    dataReal[2] = '-';
-    dataReal[3] = data[5];
-    dataReal[4] = data[6];
-    dataReal[5] = '-';
-    dataReal[6] = data[0];
-    dataReal[7] = data[1];
-    dataReal[8] = data[2];
-    dataReal[9] = data[3];
-
-    return dataReal;
-
 }
