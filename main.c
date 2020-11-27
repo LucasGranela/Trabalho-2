@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "arqIndicePessoa.h"
 #include "fornecido.h"
 #include "Utilizadas.h"
 
@@ -42,6 +43,61 @@ int main () {
         escreveCabArqSegue(arquivoSegue, quantPessoas, '1');
 
         fclose(arquivoCSV);
+        fclose(arquivoSegue);
+
+        binarioNaTela2(nomeArquivo2);
+    }
+    else if(caso == 7) {
+        FILE* arquivoSegueOrdenado;
+        Lista* li = cria_lista();
+
+        int quantPessoas = 0;
+        char estavel;
+        int numeroDeRegistros;
+
+        scanf("%[^ ]%*c%s", nomeArquivo1, nomeArquivo2);
+
+        if(!abreArquivo(&arquivoSegueOrdenado, nomeArquivo2, "wb\0", 3) || !abreArquivo(&arquivoSegue, nomeArquivo1, "rb\0", 3))
+            return 0;
+
+
+
+        fseek(arquivoSegue, 0, SEEK_SET);
+        fread(&estavel, sizeof(char), 1, arquivoSegue);
+        fread(&numeroDeRegistros, sizeof(int), 1, arquivoSegue);
+        fseek(arquivoSegue, 32, SEEK_SET);
+
+        char removido;
+        int idPessoaQueSegue;
+        int idPessoaQueESeguida;
+        char grauAmizade[4];
+        char dataInicioQueSegue[11];
+        char dataFimQueSegue[11];
+
+        for(int i = 0; i<numeroDeRegistros;i++){
+
+            fread(&removido, sizeof(char), 1, arquivoSegue);
+            fread(&idPessoaQueSegue, sizeof(int), 1, arquivoSegue);
+            fread(&idPessoaQueESeguida, sizeof(int), 1, arquivoSegue);
+            fread(grauAmizade, sizeof(char), 3, arquivoSegue);
+            grauAmizade[3] = '\0';
+            fread(dataInicioQueSegue, sizeof(char), 10, arquivoSegue);
+            dataInicioQueSegue[10] = '\0';
+            fread(dataFimQueSegue, sizeof(char), 10, arquivoSegue);
+            dataFimQueSegue[10] = '\0';
+
+            insere_lista_ordenada(li,removido,idPessoaQueSegue,idPessoaQueESeguida,grauAmizade,dataInicioQueSegue,dataFimQueSegue);
+
+
+        }
+
+        imprime_lista(li);
+
+        escreveCabArqSegue(arquivoSegueOrdenado, 0, '0');
+
+        escreveCabArqSegue(arquivoSegueOrdenado, quantPessoas, '1');
+
+        fclose(arquivoSegueOrdenado);
         fclose(arquivoSegue);
 
         binarioNaTela2(nomeArquivo2);
