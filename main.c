@@ -19,7 +19,7 @@ int main () {
     int caso;
 
     //todo caso vai usar pelo menos dois arquivos
-    char nomeArquivo1[50];
+    char nomeArquivo1[50]; 
     char nomeArquivo2[50];
 
     //FILE arquivo segue que também tem em todos os casos
@@ -32,7 +32,7 @@ int main () {
 
         scanf("%[^ ]%*c%s", nomeArquivo1, nomeArquivo2);
 
-        if(!abreArquivo(&arquivoSegue, nomeArquivo2, "wb\0", 3) || !abreArquivo(&arquivoCSV, nomeArquivo1, "r\0", 4))
+        if(!abreArquivo(&arquivoSegue, nomeArquivo2, "wb\0", 3) || !abreArquivo(&arquivoCSV, nomeArquivo1, "rt\0", 4))
             return 0;
 
         escreveCabArqSegue(arquivoSegue, 0, '0');
