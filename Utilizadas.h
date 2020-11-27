@@ -18,6 +18,6 @@
     int abreArquivo(FILE** arq, char* nome, char* modo, int tipo); 
     void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas);
     void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue);
-
+    char* arrumaData(char data[10]);
 
 #endif

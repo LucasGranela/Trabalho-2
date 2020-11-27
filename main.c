@@ -37,7 +37,7 @@ int main () {
 
         escreveCabArqSegue(arquivoSegue, 0, '0');
 
-        insereCSVparaSegue(arquivoSegue, arquivoCSV, &quantPessoas);
+        insereCSVparaSegue( arquivoCSV, arquivoSegue, &quantPessoas);
 
         escreveCabArqSegue(arquivoSegue, quantPessoas, '1');
 

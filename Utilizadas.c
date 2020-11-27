@@ -189,12 +189,12 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
 
     fseek(arqCSV, 83, SEEK_SET);
     while(fscanf(arqCSV, "%d%*c", &idPessoaPrinc) == 1){
-        fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
-        *quantPessoas++;
+        fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%*c%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
+        (*quantPessoas)++;
 
         inserirArqSegue(idPessoaPrinc, idPessoaSec, grauAmizade, dataInicio, dataFim, arqSegue);
     }
-    
+
 }
 
 void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue){
@@ -213,11 +213,34 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     }
     char removido = '1';
 
+    char *dataInicioReal = arrumaData(dataInicio);
+    char *dataFimReal = arrumaData(dataFim);
+
     //aqui escreve todos os dados no arquivoSegue.bin 
     fwrite(&removido, sizeof(char), 1, arquivoSegue);
     fwrite(&idPessoaQueSegue, 4, 1, arquivoSegue);
     fwrite(&idPessoaQueESeguida, 4, 1, arquivoSegue);
     fwrite(graAmizade, sizeof(char), 3, arquivoSegue);
-    fwrite(dataInicio, sizeof(char), 10, arquivoSegue);
-    fwrite(dataFim, sizeof(char), 10, arquivoSegue);
+    fwrite(dataInicioReal, sizeof(char), 10, arquivoSegue);
+    fwrite(dataFimReal, sizeof(char), 10, arquivoSegue);
+}
+
+char* arrumaData(char data[10]){
+    char* dataReal;
+
+    dataReal = malloc(10*sizeof(char));
+
+    dataReal[0] = data[8];
+    dataReal[1] = data[9];
+    dataReal[2] = '-';
+    dataReal[3] = data[5];
+    dataReal[4] = data[6];
+    dataReal[5] = '-';
+    dataReal[6] = data[0];
+    dataReal[7] = data[1];
+    dataReal[8] = data[2];
+    dataReal[9] = data[3];
+
+    return dataReal;
+
 }
