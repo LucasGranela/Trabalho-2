@@ -1,4 +1,4 @@
 if((pSegue.idPessoaQueSegue > atual->info.idPessoaQueSegue) 
-                    || (pSegue.idPessoaQueSegue == atual->info.idPessoaQueSegue && pSegue.idPessoaQueESeguida > atual->info.idPessoaQueESeguida)
-                    || (pSegue.idPessoaQueSegue == atual->info.idPessoaQueSegue && pSegue.idPessoaQueESeguida == atual->info.idPessoaQueESeguida && strcmp(pSegue.dataInicioQueSegue,atual->info.dataInicioQueSegue) > 0)
-                    || (pSegue.idPessoaQueSegue == atual->info.idPessoaQueSegue && pSegue.idPessoaQueESeguida == atual->info.idPessoaQueESeguida && strcmp(pSegue.dataInicioQueSegue,atual->info.dataInicioQueSegue) == 0 && strcmp(pSegue.dataFimQueSegue,atual->info.dataFimQueSegue) >= 0))
+                    || (idPessoaQueSegue == atual->idPessoaQueSegue && idPessoaQueESeguida > atual->idPessoaQueESeguida)
+                    || ((idPessoaQueSegue == atual->idPessoaQueSegue) && (idPessoaQueESeguida == atual->idPessoaQueESeguida) && (strcmp(dataInicioQueSegue,atual->dataInicioQueSegue)) > 0)
+                    || (idPessoaQueSegue == atual->idPessoaQueSegue && idPessoaQueESeguida == atual->idPessoaQueESeguida && strcmp(dataInicioQueSegue,atual->dataInicioQueSegue) == 0 && strcmp(dataFimQueSegue,atual->dataFimQueSegue) >= 0))

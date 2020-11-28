@@ -140,7 +140,10 @@ int insere_lista_ordenada(Lista* li,char removido,int idPessoaQueSegue, int idPe
     else{
         Elem *ante, *atual = *li;
 
-        while ((atual != NULL) && ) {
+        while ((atual != NULL) &&   ((idPessoaQueSegue > atual->idPessoaQueSegue)
+                                    || ((idPessoaQueSegue == atual->idPessoaQueSegue) && (idPessoaQueESeguida > atual->idPessoaQueESeguida)) || ((idPessoaQueSegue == atual->idPessoaQueSegue) && (idPessoaQueESeguida == atual->idPessoaQueESeguida) && (strcmp(dataInicioQueSegue,atual->dataInicioQueSegue)) > 0)
+                                    || ((idPessoaQueSegue == atual->idPessoaQueSegue) && (idPessoaQueESeguida == atual->idPessoaQueESeguida) && (strcmp(dataInicioQueSegue,atual->dataInicioQueSegue)) > 0)
+                                    || ((idPessoaQueSegue == atual->idPessoaQueSegue) && (idPessoaQueESeguida == atual->idPessoaQueESeguida) && (strcmp(dataInicioQueSegue,atual->dataInicioQueSegue) == 0) && (strcmp(dataFimQueSegue,atual->dataFimQueSegue) >= 0))  )) {
             ante = atual;
             atual = atual->prox;
         }
@@ -209,6 +212,19 @@ int tamanho_lista(Lista* li) {
     return cont;
 }
 */
+
+void add_bin(Lista* li,FILE* arquivo, int numeroDeNos){
+    Elem* no = *li;
+    if(no == NULL)
+        return 0;
+
+
+    for(int i = 0; i<numeroDeNos; i++){
+        inserirArqSegue(no->idPessoaQueSegue,no->idPessoaQueESeguida,no->grauAmizade,no->dataInicioQueSegue,no->dataFimQueSegue,arquivo);
+        no = no->prox;
+
+    }
+}
 
 void imprime_lista(Lista* li) {
     Elem* no = *li;

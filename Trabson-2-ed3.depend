@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1606520687 source:c:\users\pedro\desktop\trabalho-2\fornecido.c
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<ctype.h>
+
+1606538927 source:c:\users\pedro\desktop\trabalho-2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arqIndicePessoa.h"
+	"fornecido.h"
+	"Utilizadas.h"
+
+1606532421 c:\users\pedro\desktop\trabalho-2\arqindicepessoa.h
+	"Utilizadas.h"
+
+1606520687 c:\users\pedro\desktop\trabalho-2\fornecido.h
+
+1606520726 c:\users\pedro\desktop\trabalho-2\utilizadas.h
+	<stdio.h>
+	<stdlib.h>
+
+1606520726 source:c:\users\pedro\desktop\trabalho-2\utilizadas.c
+	"Utilizadas.h"
+	<string.h>
+
+1606539115 source:c:\users\pedro\desktop\trabalho-2\arqindicepessoa.c
+	"arqIndicePessoa.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
