@@ -126,8 +126,6 @@ int verificaConsistencia(FILE* arquivo){ //se tiver consistente retorna 1, se na
     char statusArquivo;
     fseek(arquivo, 0, SEEK_SET);
     fread(&statusArquivo, sizeof(char), 1, arquivo);
-    fseek(arquivo, 0, SEEK_SET);
-    fread(&statusArquivo, sizeof(char), 1, arquivo);
 
     //fecha os arquivos antes do encerramento do programa
     if(statusArquivo == '0'){
@@ -171,10 +169,8 @@ int abreArquivo(FILE** arq, char* nome, char* modo, int tipo){
         return 0;
     }
 
-    if(!verificaConsistencia(arquivo) && (strcmp(modo, "wb") != 0) && tipo != 4){
-        fclose(arquivo);
+    if((strcmp(modo, "wb\0") != 0) && tipo != 4 && !verificaConsistencia(arquivo))
         return 0;
-    }
 
     *arq = arquivo;
     return 1;
@@ -189,7 +185,7 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
 
     fseek(arqCSV, 83, SEEK_SET);
     while(fscanf(arqCSV, "%d%*c", &idPessoaPrinc) == 1){
-        fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
+        fscanf(arqCSV, "%d%*c%[^,]%*c%[^,]%*c%s" , &idPessoaSec, grauAmizade, dataInicio, dataFim);
         (*quantPessoas)++;
 
         inserirArqSegue(idPessoaPrinc, idPessoaSec, grauAmizade, dataInicio, dataFim, arqSegue);
@@ -199,7 +195,7 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
 
 void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue){
     int i;
-    int strFinal = 0; // quando for o final da string ele fica um
+    int strFinal = 0; // quando for o final da string ele fica um 
     for(i = 0; i < 3; i++){ //funcao para identificar e settar o lixo
         if(strFinal == 1)
             graAmizade[i] = '$';
@@ -213,11 +209,14 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     }
     char removido = '1';
 
-    //aqui escreve todos os dados no arquivoSegue.bin
+    char *dataInicioReal = (dataInicio);
+    char *dataFimReal = (dataFim);
+
+    //aqui escreve todos os dados no arquivoSegue.bin 
     fwrite(&removido, sizeof(char), 1, arquivoSegue);
     fwrite(&idPessoaQueSegue, 4, 1, arquivoSegue);
     fwrite(&idPessoaQueESeguida, 4, 1, arquivoSegue);
     fwrite(graAmizade, sizeof(char), 3, arquivoSegue);
-    fwrite(dataInicio, sizeof(char), 10, arquivoSegue);
-    fwrite(dataFim, sizeof(char), 10, arquivoSegue);
+    fwrite(dataInicioReal, sizeof(char), 10, arquivoSegue);
+    fwrite(dataFimReal, sizeof(char), 10, arquivoSegue);
 }
