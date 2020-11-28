@@ -103,9 +103,157 @@ int main () {
         binarioNaTela2(nomeArquivo2);
     }
     else if (caso == 8) {
-        
+        /*
+            else if (caso == 3) {
+        //variaveis dos arquivos e o campo a ser utilizado
+        char nomeArqPessoa[50];
+        char nomeArqIndex[50];
+        char campo[15]; //idPessoa,nomePessoa,idadePessoa ou twitterPessoa
+
+        //leitura das variaveis 
+        scanf("%[^ ]%*c", nomeArqPessoa);
+        scanf("%[^ ]%*c", nomeArqIndex);
+        scanf("%[^ ]%*c", campo);
+
+        //vai abrir os dois arquivos necessarios e verificar se eles estao de acordo com o necessario
+        FILE* arquivoPessoa = fopen(nomeArqPessoa, "rb");
+        FILE* arquivoIndexaPessoa = fopen(nomeArqIndex, "rb");
+
+        //verifica se existe um arquivo e se ele abre corretamente
+        if(arquivoPessoa == NULL || arquivoIndexaPessoa == NULL){
+            printf("Falha no processamento do arquivo.\n");
+            return 0;
+        }
+
+        if(!verificaConsistencia(arquivoIndexaPessoa) || !verificaConsistencia(arquivoPessoa))
+            return 0;
+
+        //de novo, queria usar o switch case, mas parece que o compilador nao compila direito entao fiz com if else
+        if(strcmp(campo, "idPessoa") == 0) {//verifica se o campo escolhido e' o do idPessoa
+            int RRN = retornaRRN(arquivoIndexaPessoa);
+
+            if(RRN != -1){
+                fseek(arquivoPessoa, ((RRN+1)*64), SEEK_SET);
+                imprimeRegistroNaTela(arquivoPessoa); //imprime o dado na tela
+            } 
+            else
+                printf("Registro inexistente.\n");
+            
+            fclose(arquivoIndexaPessoa);
+            fclose(arquivoPessoa);
+
+        } else if (strcmp(campo, "idadePessoa") == 0) {
+            int valor; //verifica a idade requerida para encontrar o campo 
+            scanf("%d", &valor);
+
+            fclose(arquivoIndexaPessoa); //nao sera necessario para esse modo
+
+            int quantRegistros;
+            
+            fread(&quantRegistros, 4, 1, arquivoPessoa); //Le a quantidade de Registros do arquvo para o loop
+            
+            fseek(arquivoPessoa, 64, SEEK_SET); //posiciona o ponteiro para dps do cabecalho para comecar o loop
+            
+            int idade;
+            char status;
+            int QuantImprimida = 0;
+
+            for(i = 0; i < quantRegistros; i++){
+                fread(&status, sizeof(char), 1, arquivoPessoa);
+                if(status == '1'){
+                    fseek(arquivoPessoa, 44, SEEK_CUR); //posiciona o ponteiro para ler a idade
+                    fread(&idade, sizeof(int), 1, arquivoPessoa);
+                    
+                    if(idade == valor){ //compara a idade
+                        fseek(arquivoPessoa, -49, SEEK_CUR); //se a idade for igual ele volta para o comeco do registro para imprimir na tela
+                        imprimeRegistroNaTela(arquivoPessoa);
+                        QuantImprimida++;
+                    }
+                    else
+                        fseek(arquivoPessoa, 15, SEEK_CUR); //pula para o proximo registro
+
+                }
+                else {
+                    fseek(arquivoPessoa, 63, SEEK_CUR); //pula para proximo registro
+                    quantRegistros++;                   //aumenta na quantidade o resgistro que nao foi contabilizado
+                }
+            }
+            if(QuantImprimida == 0) //NAO possui nenhum arquivo
+                printf("Registro inexistente.\n");
+
+            fclose(arquivoPessoa);
+        } else if (strcmp(campo, "nomePessoa") == 0) {
+            char valor[60];
+
+            scan_quote_string(valor);
+
+            char nomePessoa[40];
+            char status;
+            int QuantImprimida = 0;
+
+            fseek(arquivoPessoa, 64, SEEK_SET); //posiciona para o primeiro nome presente no arquivo
+
+            while(fread(&status, 1, 1, arquivoPessoa) == 1){
+                if(status == '0'){
+                    fseek(arquivoPessoa, 63, SEEK_CUR); // pula para o proximo registro
+                    continue;
+                }
+                    
+                fseek(arquivoPessoa, 4, SEEK_CUR);
+
+                fread(nomePessoa, 1, 40, arquivoPessoa);
+
+                if(strcmp(nomePessoa, valor) == 0){ //compara a idade
+                        fseek(arquivoPessoa, -45, SEEK_CUR); //se o nome for igual ele volta para o comeco do registro para imprimir na tela
+                        imprimeRegistroNaTela(arquivoPessoa);
+                        QuantImprimida++;
+                    }
+                else
+                    fseek(arquivoPessoa, 19, SEEK_CUR); //pula para o proximo registro
+
+            }
+            if(QuantImprimida == 0) //NAO possui nenhum arquivo
+                printf("Registro inexistente.\n");
+
+            fclose(arquivoPessoa);
+
+        } else if (strcmp(campo, "twitterPessoa") == 0){
+            char valor[40];
+
+            scan_quote_string(valor);
+
+            char twitterPessoa[15];
+            char status;
+            int QuantImprimida = 0;
+
+            fseek(arquivoPessoa, 64, SEEK_SET); //posiciona para o primeiro nome presente no arquivo
+
+            while(fread(&status, 1, 1, arquivoPessoa) == 1){
+                if(status == '0'){
+                    fseek(arquivoPessoa, 63, SEEK_CUR); // pula para o proximo registro
+                    continue;
+                }
+                    
+                fseek(arquivoPessoa, 48, SEEK_CUR);
+
+                fread(twitterPessoa, 1, 15, arquivoPessoa);
+
+                if(strcmp(twitterPessoa, valor) == 0){ //compara a idade
+                        fseek(arquivoPessoa, -64, SEEK_CUR); //se o nome for igual ele volta para o comeco do registro para imprimir na tela
+                        imprimeRegistroNaTela(arquivoPessoa);
+                        QuantImprimida++;
+                    }
+                else
+                    continue; //pula para o proximo registro
+
+            }
+            if(QuantImprimida == 0) //NAO possui nenhum arquivo
+                printf("Registro inexistente.\n");
+
+            fclose(arquivoPessoa);
+        }
+        */
 
     }
-
     return 0;
 }
