@@ -216,7 +216,7 @@ int tamanho_lista(Lista* li) {
 void add_bin(Lista* li,FILE* arquivo, int numeroDeNos){
     Elem* no = *li;
     if(no == NULL)
-        return 0;
+        return ;
 
 
     for(int i = 0; i<numeroDeNos; i++){
