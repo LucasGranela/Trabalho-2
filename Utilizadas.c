@@ -161,6 +161,28 @@ int retornaRRN(FILE* arquivo){ //retorna o RRN do id achado
     return -1; //se retornar -1,nao encontrou o id
 }
 
+int retornaRRNcomId(FILE* arquivo,int valor){ //retorna o RRN do id achado
+
+    int RRN;
+    int id = 0;
+
+    //posiciona o ponteiro do arquivo no id requerido para buscar o RRN certo
+    fseek(arquivo, 4, SEEK_SET); //primeiro id
+    //apesar do primeiro id ser com 8 bytes, se somar esse fseek com o do while da os 8 bytes necessarios
+
+    while(id < valor){ //passa por todos os id para verificar se ele nao foi excluido
+        fseek(arquivo, 4, SEEK_CUR); //pula proximo id - pula o campo do RRN
+        fread(&id, sizeof(int), 1, arquivo); //le id
+    }
+    if(id == valor){
+        //apos verificar a existencia do dado, procura-se o RRN e faz a busca no arquivoPessoa
+        fread(&RRN, sizeof(int), 1, arquivo);
+        return RRN;
+    }
+
+    return -1; //se retornar -1,nao encontrou o id
+}
+
 int abreArquivo(FILE** arq, char* nome, char* modo, int tipo){
     FILE* arquivo = fopen(nome, modo);
 
@@ -195,7 +217,7 @@ void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas){
 
 void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue){
     int i;
-    int strFinal = 0; // quando for o final da string ele fica um 
+    int strFinal = 0; // quando for o final da string ele fica um
     for(i = 0; i < 3; i++){ //funcao para identificar e settar o lixo
         if(strFinal == 1)
             graAmizade[i] = '$';
@@ -212,11 +234,21 @@ void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmiz
     char *dataInicioReal = (dataInicio);
     char *dataFimReal = (dataFim);
 
-    //aqui escreve todos os dados no arquivoSegue.bin 
+    //aqui escreve todos os dados no arquivoSegue.bin
     fwrite(&removido, sizeof(char), 1, arquivoSegue);
     fwrite(&idPessoaQueSegue, 4, 1, arquivoSegue);
     fwrite(&idPessoaQueESeguida, 4, 1, arquivoSegue);
     fwrite(graAmizade, sizeof(char), 3, arquivoSegue);
     fwrite(dataInicioReal, sizeof(char), 10, arquivoSegue);
     fwrite(dataFimReal, sizeof(char), 10, arquivoSegue);
+}
+
+char* interpretadorDeGrau(char grauAmizade[4]){
+    if(grauAmizade[0] == '0')
+        return "segue porque é uma celebridade";
+    if(grauAmizade[0] == '1')
+        return  "segue porque é amiga de minha amiga";
+    if(grauAmizade[0] == '2')
+        return "segue porque é minha amiga";
+    return "-";
 }

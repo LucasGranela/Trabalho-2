@@ -15,9 +15,9 @@
     //funcoes novas para o Trabalho 2
     void escreveCabArqSegue(FILE* arquivoSegue, int quantSeg, char status);
     //nome = nome do arquivo, modo = modo de abertura, tipo = qual dos arquivos (1 - Pessoa, 2 - Indexa, 3 - Segue, 4 - CSV)
-    int abreArquivo(FILE** arq, char* nome, char* modo, int tipo); 
+    int abreArquivo(FILE** arq, char* nome, char* modo, int tipo);
     void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas);
     void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue);
-
+    char* interpretadorDeGrau(char grauAmizade[4]);
 
 #endif
