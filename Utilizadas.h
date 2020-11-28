@@ -19,4 +19,5 @@
     void insereCSVparaSegue(FILE* arqCSV, FILE* arqSegue, int* quantPessoas);
     void inserirArqSegue(int idPessoaQueSegue, int idPessoaQueESeguida, char graAmizade[3], char dataInicio[10], char dataFim[10],  FILE* arquivoSegue);
 
+
 #endif
