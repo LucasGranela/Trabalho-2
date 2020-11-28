@@ -13,5 +13,10 @@
   "directory": "/home/logranela/ED3/Trabalho-2/build",
   "command": "/bin/c99-gcc   -g   -o CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o   -c /home/logranela/ED3/Trabalho-2/Utilizadas.c",
   "file": "/home/logranela/ED3/Trabalho-2/Utilizadas.c"
+},
+{
+  "directory": "/home/logranela/ED3/Trabalho-2/build",
+  "command": "/bin/c99-gcc   -g   -o CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o   -c /home/logranela/ED3/Trabalho-2/arqIndicePessoa.c",
+  "file": "/home/logranela/ED3/Trabalho-2/arqIndicePessoa.c"
 }
 ]

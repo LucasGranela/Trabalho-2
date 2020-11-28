@@ -547,6 +547,33 @@ Utilizadas.c.s:
 	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.s
 .PHONY : Utilizadas.c.s
 
+arqIndicePessoa.o: arqIndicePessoa.c.o
+
+.PHONY : arqIndicePessoa.o
+
+# target to build an object file
+arqIndicePessoa.c.o:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o
+.PHONY : arqIndicePessoa.c.o
+
+arqIndicePessoa.i: arqIndicePessoa.c.i
+
+.PHONY : arqIndicePessoa.i
+
+# target to preprocess a source file
+arqIndicePessoa.c.i:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.i
+.PHONY : arqIndicePessoa.c.i
+
+arqIndicePessoa.s: arqIndicePessoa.c.s
+
+.PHONY : arqIndicePessoa.s
+
+# target to generate assembly for a file
+arqIndicePessoa.c.s:
+	$(MAKE) -f CMakeFiles/TrabalhoED3-2.dir/build.make CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.s
+.PHONY : arqIndicePessoa.c.s
+
 fornecido.o: fornecido.c.o
 
 .PHONY : fornecido.o
@@ -644,6 +671,9 @@ help:
 	@echo "... Utilizadas.o"
 	@echo "... Utilizadas.i"
 	@echo "... Utilizadas.s"
+	@echo "... arqIndicePessoa.o"
+	@echo "... arqIndicePessoa.i"
+	@echo "... arqIndicePessoa.s"
 	@echo "... fornecido.o"
 	@echo "... fornecido.i"
 	@echo "... fornecido.s"

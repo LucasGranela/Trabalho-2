@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o"
+  "CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o"
   "CMakeFiles/TrabalhoED3-2.dir/fornecido.c.o"
   "CMakeFiles/TrabalhoED3-2.dir/main.c.o"
   "TrabalhoED3-2"

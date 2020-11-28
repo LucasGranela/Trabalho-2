@@ -4,9 +4,14 @@
 CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o: ../Utilizadas.c
 CMakeFiles/TrabalhoED3-2.dir/Utilizadas.c.o: ../Utilizadas.h
 
+CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o: ../Utilizadas.h
+CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o: ../arqIndicePessoa.c
+CMakeFiles/TrabalhoED3-2.dir/arqIndicePessoa.c.o: ../arqIndicePessoa.h
+
 CMakeFiles/TrabalhoED3-2.dir/fornecido.c.o: ../fornecido.c
 
 CMakeFiles/TrabalhoED3-2.dir/main.c.o: ../Utilizadas.h
+CMakeFiles/TrabalhoED3-2.dir/main.c.o: ../arqIndicePessoa.h
 CMakeFiles/TrabalhoED3-2.dir/main.c.o: ../fornecido.h
 CMakeFiles/TrabalhoED3-2.dir/main.c.o: ../main.c
 
