@@ -123,11 +123,18 @@ int main () {
     
 
     //vai abrir os dois arquivos necessarios e verificar se eles estao de acordo com o necessario
-    FILE* arquivoPessoa;
-    FILE* arquivoIndexaPessoa;
+    FILE* arquivoPessoa = fopen(nomeArqPessoa, "rb");
+    FILE* arquivoIndexaPessoa = fopen(nomeArqIndex, "rb");
+    arquivoSegue = fopen(nomeArquivo1, "rb");
 
-    if(!abreArquivo(&arquivoSegue, nomeArquivo1, "rb\0", 3) || !abreArquivo(&arquivoPessoa, nomeArqPessoa, "rb\0", 1) || !abreArquivo(&arquivoIndexaPessoa, nomeArqIndex, "rb\0", 2))
-            return 0;
+    //verifica se existe um arquivo e se ele abre corretamente
+    if(arquivoPessoa == NULL || arquivoIndexaPessoa == NULL|| arquivoSegue == NULL){
+        printf("Falha no processamento do arquivo.\n");
+        return 0;
+    }
+
+    if(!verificaConsistencia(arquivoIndexaPessoa) || !verificaConsistencia(arquivoPessoa)|| !verificaConsistencia(arquivoSegue))
+        return 0;
 
     //de novo, queria usar o switch case, mas parece que o compilador nao compila direito entao fiz com if else
     if(strcmp(campo, "idPessoa") == 0) {//verifica se o campo escolhido e' o do idPessoa
