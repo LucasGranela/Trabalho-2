@@ -133,7 +133,7 @@ int main () {
         return 0;
     }
 
-    if(!verificaConsistencia(arquivoIndexaPessoa) || !verificaConsistencia(arquivoPessoa)|| !verificaConsistencia(arquivoSegue))
+    if(!verificaConsistenciaComAPalavraProcessamento(arquivoIndexaPessoa) || !verificaConsistenciaComAPalavraProcessamento(arquivoPessoa)|| !verificaConsistenciaComAPalavraProcessamento(arquivoSegue))
         return 0;
 
     //de novo, queria usar o switch case, mas parece que o compilador nao compila direito entao fiz com if else

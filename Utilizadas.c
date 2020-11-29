@@ -137,6 +137,22 @@ int verificaConsistencia(FILE* arquivo){ //se tiver consistente retorna 1, se na
     return 1;
 }
 
+int verificaConsistenciaComAPalavraProcessamento(FILE* arquivo){ //se tiver consistente retorna 1, se nao 0
+    //verifica se o arquivo esta consistente para continuar o programa
+    char statusArquivo;
+    fseek(arquivo, 0, SEEK_SET);
+    fread(&statusArquivo, sizeof(char), 1, arquivo);
+
+    //fecha os arquivos antes do encerramento do programa
+    if(statusArquivo == '0'){
+        printf("Falha no processamento do arquivo.\n");
+        fclose(arquivo);
+        return 0;
+    }
+
+    return 1;
+}
+
 int retornaRRN(FILE* arquivo){ //retorna o RRN do id achado
     int valor; //verifica o id requerido para encontrar o campo
     scanf("%d", &valor);
